@@ -1,0 +1,70 @@
+.scoreboard {
+    display: flex;
+    justify-content: space-around;
+    margin: 0px;
+    background: darkgray;
+    height: 300px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 200px;
+}
+
+.label {
+    color: white;
+    font-size: 36px;
+    font-weight: 900;
+}
+
+.score-human,
+.score-computer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 100px;
+    background: white; 
+    color: black; 
+    font-size: 64px; 
+    font-weight: 600px;
+}
+
+.options {
+    display: flex;
+    justify-content: center;
+    height: 200px;
+    padding: 100px; 
+    gap: 80px;
+}
+
+.rock,
+.paper,
+.scissors {
+    height: 50px;
+    width: 120px;
+    border: 3px solid black; 
+}
+
+.rock {
+    background: lightgray;
+    color: black;
+}
+
+.paper {
+    background: white;
+    color: black;
+}
+
+.scissors {
+    background: red; 
+    color: white;
+}
+
+
+body {
+    margin: 0;
+}

@@ -3,10 +3,6 @@ function getComputerChoice(){
   return valueTostring(numChoice);
 }
 
-function getHumanChoice(){
-    return choice = prompt().toLowerCase();
-}
-
 function valueTostring(value){
     switch (value) {
         case 0: 
@@ -18,63 +14,80 @@ function valueTostring(value){
     }
 }
 
-function playRound(){
-    const humanChoice = getHumanChoice();
-    const computerChoice = getComputerChoice();
-    
-    var humanOutcome = 0;
-    var computerOutcome = 0;
-
-    switch (humanChoice){
-        case "paper":
-            if (computerChoice === "rock") {
-                computerOutcome += 1;
-            }
-            else if (computerChoice === "scissors") {
-                humanOutcome += 1;
-            }
-        case "rock":
-            if (computerChoice === "paper") {
-                computerOutcome += 1;
-            }
-            else if (computerChoice === "scissors") {
-                humanOutcome += 1;
-            }
-        case "scissors": 
-            if (computerChoice === "rock") {
-                computerOutcome += 1;
-            }
-            else if (computerChoice === "paper") {
-                humanOutcome += 1;
-            }
+function playRound(humanChoice){
+    if (round > 5) {
+        alert("Game Over!")
     }
 
-    var outcomeStatement = "";
-
-    if (humanOutcome === 0 && computerOutcome === 0) {
-        outcomeStatement = "Tied! Both picked " + humanChoice;
-    }
-    else if (humanOutcome === 1) {
-        outcomeStatement = "You won: " + humanChoice + " beats " + computerChoice + ".";
-        humanScore += 1;
-    }
     else { 
-        outcomeStatement = "You lost: " + computerChoice + " beats " + humanChoice + ".";
-        computerScore += 1;
-    }
+        const computerChoice = getComputerChoice();
+        var humanOutcome = 0;
+        var computerOutcome = 0;
 
-    alert(outcomeStatement);
+        switch (humanChoice){
+            case "paper":
+                if (computerChoice === "rock") {
+                    computerOutcome += 1;
+                }
+                else if (computerChoice === "scissors") {
+                    humanOutcome += 1;
+                }
+            case "rock":
+                if (computerChoice === "paper") {
+                    computerOutcome += 1;
+                }
+                else if (computerChoice === "scissors") {
+                    humanOutcome += 1;
+                }
+            case "scissors": 
+                if (computerChoice === "rock") {
+                    computerOutcome += 1;
+                }
+                else if (computerChoice === "paper") {
+                    humanOutcome += 1;
+                }
+        }
+
+        var outcomeStatement = "";
+
+        if (humanOutcome === 0 && computerOutcome === 0) {
+            outcomeStatement = "Tied! Both picked " + humanChoice;
+        }
+        else if (humanOutcome === 1) {
+            outcomeStatement = "You won: " + humanChoice + " beats " + computerChoice + ".";
+            humanScore += 1;
+        }
+        else { 
+            outcomeStatement = "You lost: " + computerChoice + " beats " + humanChoice + ".";
+            computerScore += 1;
+        }
+
+        alert(outcomeStatement);
+        round += 1;
+        humanDisplayScore.textContent = humanScore;
+        computerDisplayScore.textContent = computerScore;
+    }
 }
 
-function playGame(){
-    for (let game = 0; game < 5; game++) {
-        playRound();
-    }
-    const endMessage = "Your Score: " + humanScore + "   |   Computer Score: " + computerScore;
-    alert(endMessage);
-}
-
+var round = 1; 
 var humanScore = 0;
 var computerScore = 0;
-playGame();
 
+const humanDisplayScore = document.querySelector(".score-human");
+const computerDisplayScore = document.querySelector(".score-computer");
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+        if (button.id === "rock") {
+            playRound("rock");
+        }
+        else if (button.id === "paper") {
+            playRound("paper");
+               
+        }
+        else if (button.id === "scissors") {
+            playRound("scissors");
+        }
+    });
+});

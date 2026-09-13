@@ -15,11 +15,6 @@ function valueTostring(value){
 }
 
 function playRound(humanChoice){
-    if (round > 5) {
-        alert("Game Over!")
-    }
-
-    else { 
         const computerChoice = getComputerChoice();
         var humanOutcome = 0;
         var computerOutcome = 0;
@@ -32,6 +27,7 @@ function playRound(humanChoice){
                 else if (computerChoice === "scissors") {
                     humanOutcome += 1;
                 }
+                break;
             case "rock":
                 if (computerChoice === "paper") {
                     computerOutcome += 1;
@@ -39,6 +35,7 @@ function playRound(humanChoice){
                 else if (computerChoice === "scissors") {
                     humanOutcome += 1;
                 }
+                break;
             case "scissors": 
                 if (computerChoice === "rock") {
                     computerOutcome += 1;
@@ -46,6 +43,7 @@ function playRound(humanChoice){
                 else if (computerChoice === "paper") {
                     humanOutcome += 1;
                 }
+                break;
         }
 
         var outcomeStatement = "";
@@ -62,19 +60,27 @@ function playRound(humanChoice){
             computerScore += 1;
         }
 
-        alert(outcomeStatement);
-        round += 1;
         humanDisplayScore.textContent = humanScore;
         computerDisplayScore.textContent = computerScore;
-    }
+        outcomeMessage.textContent = outcomeStatement; 
+
+        if (humanScore === 5 || computerScore === 5) {
+            if (humanScore > computerScore) {
+                outcomeMessage.textContent = "You Won!";
+            }
+            else if (humanScore < computerScore ) {
+                outcomeMessage.textContent = "You Lost!";
+            }
+            buttons.forEach((button) => button.remove());
+        }
 }
 
-var round = 1; 
 var humanScore = 0;
 var computerScore = 0;
 
 const humanDisplayScore = document.querySelector(".score-human");
 const computerDisplayScore = document.querySelector(".score-computer");
+const outcomeMessage = document.querySelector(".message");
 const buttons = document.querySelectorAll("button");
 
 buttons.forEach((button) => {
